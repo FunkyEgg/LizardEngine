@@ -1,11 +1,29 @@
 import { shaderObject } from './constants/shader.js';
 
 /**
- * The base shader class
+ * The shader program
+ * @param {shaderObject[]} shaders The array of shader (a vert and frag shader are required)
+ * @param {RenderingContext} gl The rendering context
  */
 export class ShaderProgram {
-    constructor(shaderCode, shaderType) {
+    /**
+     * The shader program
+     * @param {shaderObject[]} shaders The array of shader (a vert and frag shader are required)
+     * @param {RenderingContext} gl The rendering context
+     */
+    constructor(shaders, gl) {
+        if (!gl) throw new Error('No WebGL context provided');
         
+        for (let shader of shaders) {
+            // TODO
+            
+        }
+        
+        this.m_gl = gl;
+    }
+
+    #loadShader() {
+
     }
 }
 

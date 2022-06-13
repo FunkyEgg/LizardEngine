@@ -4,6 +4,7 @@ let sceneWidth = window.innerWidth;
 let sceneHeight = window.innerHeight;
 
 let scene = new lizard.Scene(sceneWidth, sceneHeight, 2);
+let gl = scene.m_gl;
 
 scene.onLoad((_gl) => {
     let gl = lizard.parseRenderingContext(_gl);
