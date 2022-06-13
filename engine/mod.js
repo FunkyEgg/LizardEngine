@@ -1,2 +1,1 @@
-export { Root } from './src/root';
-export { Scene } from './src/scene';
+export { Scene } from './src/scene.js';

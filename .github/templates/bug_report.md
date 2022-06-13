@@ -1,6 +1,8 @@
 # How to layout a bug report
 
-Bug - \<Breif bug description\> - \<Engine version number\>
+Title: BUG REPORT - \<Breif bug description\> - \<Engine version number\>/\<App version number\>
+
+Description:
 
 What the expected behaviour is (Be as descriptive as possible)
 
