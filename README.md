@@ -1,4 +1,5 @@
 # Lizard Engine
+![Logo](.github/logo.png)
 The offical Lizard Engine
 
 ## File Locations
