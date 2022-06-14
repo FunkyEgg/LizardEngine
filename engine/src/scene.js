@@ -45,13 +45,18 @@ export class Scene {
         `;
         document.head.appendChild(style);
 
-        this.m_width = width;
-        this.m_height = height;
-        this.m_rootDiv = rootDiv;
-        this.m_canvas = canvas;
-        this.m_webglVer = webglVer;
+        this.width = width;
+        this.height = height;
+        this.rootDiv = rootDiv;
+        this.canvas = canvas;
+        this.webglVer = webglVer;
     }
-
+    /**
+     * Returns the rendering context
+     * @returns {RenderingContext} The rendering context
+     */
+    getRenderingContext() { return this.gl }
+    
     /**
      * Defines the scene onload method
      * @param {Function} onLoadFunction The function to call once the program has loaded
@@ -63,15 +68,14 @@ export class Scene {
     };
 
     #onLoad(onLoadFunction) {
-        let gl = this.m_canvas.getContext(this.m_webglVer === 2 ? 'webgl2' : 'webgl');
+        this.gl = this.canvas.getContext(this.webglVer === 2 ? 'webgl2' : 'webgl');
 
-        if (gl === null) {
+        if (this.gl === null) {
             alert('Unable to initialize WebGL. Your browser or machine may not support it.');
             return;
         } else console.log('WebGL initialized');
 
-        this.m_gl = gl;
-
-        onLoadFunction(gl);
+        onLoadFunction(this.gl);
     }
+
 }
