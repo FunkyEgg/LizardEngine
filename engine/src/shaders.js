@@ -1,19 +1,19 @@
 /**
  * The shader program
  * @param {ShaderObject[]} shaders The array of shader (a vert and frag shader are required)
- * @param {RenderingContext} gl The rendering context
+ * @param {RenderingContext} ctx The rendering context
  */
 export class ShaderProgram {
     /**
      * The shader program
      * @param {ShaderObject[]} shaders The array of shader (a vert and frag shader are required)
-     * @param {RenderingContext} gl The rendering context
+     * @param {RenderingContext} ctx The rendering context
      */
-    constructor(shaders, gl) {
-        if (!gl) throw new Error('No WebGL context provided');
+    constructor(shaders, ctx) {
+        if (!ctx) throw new Error('No ctx context provided');
         if (shaders.length < 2) throw new Error('At least 2 shaders are required');
 
-        this.gl = gl;
+        this.ctx = ctx;
         
         console.log(shaders);
 
@@ -23,13 +23,13 @@ export class ShaderProgram {
         }
         
 
-        this.program = gl.createProgram();
-        gl.attachShader(this.program, this.vertShader);
-        gl.attachShader(this.program, this.fragShader);
-        gl.linkProgram(this.program);
+        this.program = ctx.createProgram();
+        ctx.attachShader(this.program, this.vertShader);
+        ctx.attachShader(this.program, this.fragShader);
+        ctx.linkProgram(this.program);
 
-        if (!gl.getProgramParameter(this.program, gl.LINK_STATUS))
-            throw new Error(`Unable to initialize the shader program: ${gl.getProgramInfoLog(this.program)}`);
+        if (!ctx.getProgramParameter(this.program, ctx.LINK_STATUS))
+            throw new Error(`Unable to initialize the shader program: ${ctx.getProgramInfoLog(this.program)}`);
     }
 
     #loadShader(shaderCode, shaderType) {
@@ -37,23 +37,23 @@ export class ShaderProgram {
         if (!shaderType) throw new Error('No shader type provided');
 
         if (shaderType === 'vertex') {
-            const shader = this.gl.createShader(this.gl.VERTEX_SHADER);
-            this.gl.shaderSource(shader, shaderCode);
-            this.gl.compileShader(shader);
+            const shader = this.ctx.createShader(this.ctx.VERTEX_SHADER);
+            this.ctx.shaderSource(shader, shaderCode);
+            this.ctx.compileShader(shader);
 
             this.vertShader = shader;
 
-            if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS))
-                throw new Error(`An error occurred compiling the shaders: ${gl.getShaderInfoLog(shader)}`);
+            if (!this.ctx.getShaderParameter(shader, this.ctx.COMPILE_STATUS))
+                throw new Error(`An error occurred compiling the shaders: ${ctx.getShaderInfoLog(shader)}`);
         } else if (shaderType === 'fragment') {
-            const shader = this.gl.createShader(this.gl.FRAGMENT_SHADER);
-            this.gl.shaderSource(shader, shaderCode);
-            this.gl.compileShader(shader);
+            const shader = this.ctx.createShader(this.ctx.FRAGMENT_SHADER);
+            this.ctx.shaderSource(shader, shaderCode);
+            this.ctx.compileShader(shader);
 
             this.fragShader = shader;
 
-            if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS))
-                throw new Error(`An error occurred compiling the shaders: ${gl.getShaderInfoLog(shader)}`);
+            if (!this.ctx.getShaderParameter(shader, this.ctx.COMPILE_STATUS))
+                throw new Error(`An error occurred compiling the shaders: ${ctx.getShaderInfoLog(shader)}`);
         } else throw new Error(`${shaderType} is not a valid shader type`);
     }
 }
