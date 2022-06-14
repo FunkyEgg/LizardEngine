@@ -2,20 +2,20 @@
  * The root for the entire scene
  * @param {number} width The width for the canvas
  * @param {number} height The height for the canvas
- * @param {1 | 2} webglVer The version for webgl (1 or 2)
+ * @param {1 | 2} ctxVer The version for ctx (1 or 2)
  */
 export class Scene {
     /**
      * The root for the entire scene
      * @param {number} width The width for the canvas
      * @param {number} height The height for the canvas
-     * @param {1 | 2} webglVer The version for webgl (1 or 2)
+     * @param {1 | 2} WebGLVer The version for ctx (1 or 2)
      */
-    constructor(width, height, webglVer) {
+    constructor(width, height, WebGLVer) {
         if (!height) throw new Error('No height provided');
         if (!width) throw new Error('No width provided');
-        if (!webglVer) throw new Error('No webgl version provided');
-        if (webglVer !== 1 && webglVer !== 2) throw new Error('Invalid webgl version');
+        if (!WebGLVer) throw new Error('No ctx version provided');
+        if (WebGLVer !== 1 && WebGLVer !== 2) throw new Error('Invalid ctx version');
 
         let rootDiv = document.createElement('div');
         rootDiv.className = 'root';
@@ -49,13 +49,13 @@ export class Scene {
         this.height = height;
         this.rootDiv = rootDiv;
         this.canvas = canvas;
-        this.webglVer = webglVer;
+        this.WebGLVer = WebGLVer;
     }
     /**
      * Returns the rendering context
      * @returns {RenderingContext} The rendering context
      */
-    getRenderingContext() { return this.gl }
+    getRenderingContext() { return this.ctx }
     
     /**
      * Defines the scene onload method
@@ -68,14 +68,14 @@ export class Scene {
     };
 
     #onLoad(onLoadFunction) {
-        this.gl = this.canvas.getContext(this.webglVer === 2 ? 'webgl2' : 'webgl');
+        this.ctx = this.canvas.getContext(this.WebGLVer === 2 ? 'webgl2' : 'webgl');
 
-        if (this.gl === null) {
+        if (this.ctx === null) {
             alert('Unable to initialize WebGL. Your browser or machine may not support it.');
             return;
-        } else console.log('WebGL initialized');
+        } else console.log('ctx initialized');
 
-        onLoadFunction(this.gl);
+        onLoadFunction(this.ctx);
     }
 
 }
