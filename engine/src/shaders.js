@@ -1,5 +1,3 @@
-import { shaderObject } from './constants/shader.js';
-
 /**
  * The shader program
  * @param {shaderObject[]} shaders The array of shader (a vert and frag shader are required)
@@ -8,7 +6,7 @@ import { shaderObject } from './constants/shader.js';
 export class ShaderProgram {
     /**
      * The shader program
-     * @param {shaderObject[]} shaders The array of shader (a vert and frag shader are required)
+     * @param {ShaderObject[]} shaders The array of shader (a vert and frag shader are required)
      * @param {RenderingContext} gl The rendering context
      */
     constructor(shaders, gl) {
