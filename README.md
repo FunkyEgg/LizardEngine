@@ -1,4 +1,3 @@
-![Lizard Engine Logo](.github/logo.png)
 # Lizard Engine
 The offical Lizard Engine
 
