@@ -51,11 +51,6 @@ export class Scene {
         this.canvas = canvas;
         this.WebGLVer = WebGLVer;
     }
-    /**
-     * Returns the rendering context
-     * @returns {RenderingContext} The rendering context
-     */
-    getRenderingContext() { return this.ctx }
     
     /**
      * Defines the scene onload method
@@ -73,7 +68,7 @@ export class Scene {
         if (this.ctx === null) {
             alert('Unable to initialize WebGL. Your browser or machine may not support it.');
             return;
-        } else console.log('ctx initialized');
+        } else console.log(`WebGL${this.WebGLVer} initialized`);
 
         onLoadFunction(this.ctx);
     }

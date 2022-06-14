@@ -1,21 +1,19 @@
 import * as lizard from '../engine/mod.js';
 
-let sceneWidth = window.innerWidth;
-let sceneHeight = window.innerHeight;
+const sceneWidth = window.innerWidth;
+const sceneHeight = window.innerHeight;
 
-let scene = new lizard.Scene(sceneWidth, sceneHeight, 1);
-
-scene.onLoad((ctx) => {
-    ctx.clearColor(1.0, 1.0, 0.0, 1.0);
-    ctx.clear(ctx.COLOR_BUFFER_BIT);
+const scene = new lizard.Scene(sceneWidth, sceneHeight, 1);
+scene.onLoad((gl) => {
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 });
+const gl = scene.ctx;
 
 const vertShader = new lizard.ShaderObject('vertex', `
 attribute vec4 aVertexPosition;
-
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
-
 void main() {
     gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
 }
@@ -26,16 +24,15 @@ void main() {
 }
 `);
 const shaderArray = [fragShader, vertShader];
-const shaderProgram = new lizard.ShaderProgram(shaderArray, scene.getRenderingContext());
+const shaderProgram = new lizard.ShaderProgram(shaderArray, gl);
 
-//! Errors somehow
 const programInfo = {
     program: shaderProgram,
     attribLocations: {
-        vertexPosition: scene.getRenderingContext().getAttribLocation(shaderProgram, 'aVertexPosition'),
+        vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
     },
     uniformLocations: {
-        projectionMatrix: scene.getRenderingContext().getUniformLocation(shaderProgram, 'uProjectionMatrix'),
-        modelViewMatrix: scene.getRenderingContext().getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+        projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+        modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
     },
 };
