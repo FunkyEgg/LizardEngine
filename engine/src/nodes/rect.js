@@ -15,8 +15,12 @@ export class Rect extends Root {
      * @returns {ArrayBuffer} The position buffer
      */
     constructor(posX, posY, nPosX, nPosY, ctx) {
-        if (!sizeX) throw new Error('No sizeX provided');
-        if (!sizeY) throw new Error('No sizeY provided');
+        super();
+
+        if (!posX) throw new Error('No sizeX provided');
+        if (!posY) throw new Error('No sizeY provided');
+        if (!nPosX) throw new Error('No nPosX provided');
+        if (!nPosY) throw new Error('No nPosY provided');
         if (!ctx) throw new Error('No rendering context provided');
 
         this.positionBuffer = ctx.createBuffer();

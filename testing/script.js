@@ -3,7 +3,7 @@ import * as lizard from '../engine/mod.js';
 const sceneWidth = window.innerWidth;
 const sceneHeight = window.innerHeight;
 
-const scene = new lizard.Scene(sceneWidth, sceneHeight, 1);
+const scene = new lizard.Scene(sceneWidth, sceneHeight, 2);
 scene.onLoad((gl) => {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -36,3 +36,5 @@ const programInfo = {
         modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
     },
 };
+
+const rect1 = new lizard.Rect(1, 1, -1, -1, gl)
